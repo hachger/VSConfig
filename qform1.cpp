@@ -189,7 +189,7 @@ void QForm1::on_pushButton_3_clicked()
             case '0':
                 strncpy(strAux, ui->lineEdit_2->text().toUtf8().data(), ui->lineEdit_2->text().length());
                 strAux[ui->lineEdit_2->text().length()] = '\0';
-                strncat(strAux, "/arm-none-eabi-g++", 18);
+                strncat(strAux, "/arm-none-eabi-g++", 19);
                 break;
             case '1':
                 strcpy(strAux, "");
@@ -243,7 +243,18 @@ void QForm1::on_pushButton_3_clicked()
             case '0':
                 strncpy(strAux, ui->lineEdit_4->text().toUtf8().data(), ui->lineEdit_4->text().length());
                 strAux[ui->lineEdit_4->text().length()] = '\0';
-                strncat(strAux, "/MyMake.exe", 11);
+#ifdef WIN32
+                strncat(strAux, "/MyMake.exe", 12);
+#else
+                strncat(strAux, "/MyMake", 8);
+#endif
+                break;
+            case '1':
+#ifdef WIN32
+                strncpy(strAux, "cppvsdbg", 9);
+#else
+                strncpy(strAux, "cppdbg", 7);
+#endif
                 break;
             default:
                 strAux[++i] = '\0';
@@ -297,7 +308,11 @@ void QForm1::on_pushButton_3_clicked()
             case '1':
                 strncpy(strAux, ui->lineEdit_4->text().toUtf8().data(), ui->lineEdit_4->text().length());
                 strAux[ui->lineEdit_4->text().length()] = '\0';
-                strncat(strAux, "/MyMake.exe", 11);
+#ifdef WIN32
+                strncat(strAux, "/MyMake.exe", 12);
+#else
+                strncat(strAux, "/MyMake", 8);
+#endif
                 break;
             default:
                 strAux[++i] = '\0';
